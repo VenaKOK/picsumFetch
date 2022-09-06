@@ -3,26 +3,6 @@ let main = document.querySelector("main");
 
 let section, p, button, img, a;
 
-/**
-section= document.createElement("section");
-aside = document.createElement("aside");
-p = document.createElement("p");
-button = document.createElement("button");
-img = document.createElement("img");
-a = document.createElement('a');
-
- */
-
-
-/**
- * var a = document.createElement('a');
-      var linkText = document.createTextNode("my title text");
-      a.appendChild(linkText);
-      a.title = "my title text";
-      a.href = "http://example.com";
-      document.body.appendChild(a);
- */
-
 let url = `https://picsum.photos/v2/list?page=2&limit=6`;
 let urlImage =`https://picsum.photos/id/`
 
@@ -45,25 +25,27 @@ fetch(url)
 function getImage(collection) {
     collection.forEach(element => {
         console.log(element);
-        createCard(`${urlImage}${element.id}/2000/2000`);
+        createCard(`${urlImage}${element.id}/2000/2000`, element.url);
         fillCard(element.author, element.url);
     });
 }
 
 
-function createCard(urlImag){
+function createCard(urlImag, urlUnsplash){
     section= document.createElement("section");
     aside = document.createElement("aside");
     p = document.createElement("p");
     button = document.createElement("button");
     img = document.createElement("img");
-    
+    a = document.createElement('a');
+    a.append(img);
+    a.href=`${urlUnsplash}`
     main.append(section);
     section.append(aside);
     aside.append(p);
     aside.append(button);
-    section.append(img);
-    img.src=`${urlImag}`
+    section.append(a);
+    img.src=`${urlImag}`;
 }
 
 function fillCard(author, urlUnsplash) {
